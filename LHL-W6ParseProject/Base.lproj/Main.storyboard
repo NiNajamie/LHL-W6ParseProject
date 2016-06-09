@@ -159,7 +159,7 @@
                                     <constraint firstAttribute="height" constant="21" id="2L4-5S-ukj"/>
                                     <constraint firstAttribute="width" constant="72" id="w20-uT-MML"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -183,16 +183,14 @@
                                 <color key="textColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="addressLabel" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DsS-Z5-yVi">
-                                <rect key="frame" x="97" y="141" width="180" height="71"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="rbJ-D1-APo">
+                                <rect key="frame" x="37" y="238" width="300" height="250"/>
+                                <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="180" id="WXt-sy-rxC"/>
-                                    <constraint firstAttribute="height" constant="70.5" id="clV-zS-Jov"/>
+                                    <constraint firstAttribute="width" constant="300" id="Nci-qj-A2F"/>
+                                    <constraint firstAttribute="height" constant="250" id="iH3-0x-AXN"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <color key="textColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yHk-9b-hSe">
                                 <rect key="frame" x="162" y="517" width="50" height="30"/>
                                 <color key="backgroundColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -213,22 +211,23 @@
                                     <constraint firstAttribute="height" constant="21" id="4Wd-tm-iu0"/>
                                     <constraint firstAttribute="width" constant="90" id="ldy-8l-CD8"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="rbJ-D1-APo">
-                                <rect key="frame" x="37" y="238" width="300" height="250"/>
-                                <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="addressLabel" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DsS-Z5-yVi">
+                                <rect key="frame" x="97" y="141" width="180" height="71"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="300" id="Nci-qj-A2F"/>
-                                    <constraint firstAttribute="height" constant="250" id="iH3-0x-AXN"/>
+                                    <constraint firstAttribute="width" constant="180" id="WXt-sy-rxC"/>
+                                    <constraint firstAttribute="height" constant="70.5" id="clV-zS-Jov"/>
                                 </constraints>
-                            </mapView>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Elt-yN-mNz" firstAttribute="top" secondItem="yHk-9b-hSe" secondAttribute="bottom" constant="120" id="8IF-b9-cUM"/>
                             <constraint firstItem="DsS-Z5-yVi" firstAttribute="top" secondItem="CFB-a5-kpP" secondAttribute="bottom" constant="16" id="BMy-Qb-pKl"/>
                             <constraint firstItem="DsS-Z5-yVi" firstAttribute="centerX" secondItem="HWF-Xt-f0i" secondAttribute="centerX" id="KJZ-pm-fcf"/>
                             <constraint firstItem="duY-Du-j8n" firstAttribute="leading" secondItem="HWF-Xt-f0i" secondAttribute="leadingMargin" constant="37" id="KOY-B6-Yb7"/>
@@ -241,7 +240,7 @@
                             <constraint firstItem="rbJ-D1-APo" firstAttribute="centerX" secondItem="HWF-Xt-f0i" secondAttribute="centerX" id="YiF-78-nUG"/>
                             <constraint firstItem="Q3v-Id-UrX" firstAttribute="leading" secondItem="HWF-Xt-f0i" secondAttribute="leadingMargin" constant="37" id="fhM-FR-Mpd"/>
                             <constraint firstItem="CFB-a5-kpP" firstAttribute="top" secondItem="hiO-Sw-Z6J" secondAttribute="bottom" constant="7" id="j06-gj-NHc"/>
-                            <constraint firstItem="rbJ-D1-APo" firstAttribute="leading" secondItem="DsS-Z5-yVi" secondAttribute="trailing" constant="-240" id="sED-ZE-MfT"/>
+                            <constraint firstItem="yHk-9b-hSe" firstAttribute="top" secondItem="rbJ-D1-APo" secondAttribute="bottom" constant="29" id="sEQ-0z-bSo"/>
                             <constraint firstItem="hiO-Sw-Z6J" firstAttribute="top" secondItem="6qq-wB-Zls" secondAttribute="bottom" constant="12" id="tEo-hg-S9H"/>
                             <constraint firstAttribute="trailingMargin" secondItem="CFB-a5-kpP" secondAttribute="trailing" constant="14" id="zu8-rx-qpm"/>
                         </constraints>
