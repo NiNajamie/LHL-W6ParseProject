@@ -14,6 +14,7 @@
 
 @implementation ViewController
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.nameTextField = _nameTextField;
@@ -44,11 +45,9 @@
                                                          style:UIAlertActionStyleDefault
                                                        handler:^(UIAlertAction * action) {
                                                        }];
-            // add + present(show)VC
+            // add & present(show)VC
             [alert addAction:ok];
             [alert presentationController];
-
-            
             
         } else {
             // Show the errorString somewhere and let the user try again.
