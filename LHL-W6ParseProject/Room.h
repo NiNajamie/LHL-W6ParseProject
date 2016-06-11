@@ -10,4 +10,9 @@
 
 @interface Room : PFObject
 
+@property (nonatomic) NSString *name;
+@property (nonatomic) NSString *address;
+@property (nonatomic) PFFile *mapFile;
+
+
 @end

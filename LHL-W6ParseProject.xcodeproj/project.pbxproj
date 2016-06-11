@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9638C74D1D0B8785003D06DC /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9638C74C1D0B8785003D06DC /* MapKit.framework */; };
 		96A350EB1D09F36F008B3F98 /* RoomTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96A350EA1D09F36F008B3F98 /* RoomTableViewController.m */; };
 		96FF9ACF1D08A363000B3967 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 96FF9ACE1D08A363000B3967 /* main.m */; };
 		96FF9AD21D08A363000B3967 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 96FF9AD11D08A363000B3967 /* AppDelegate.m */; };
@@ -25,6 +26,8 @@
 		0DC5D296BBABBC6332C7B95C /* Pods_LHL_W6ParseProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LHL_W6ParseProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A632D274A8BCF58539139A6 /* Pods-LHL-W6ParseProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LHL-W6ParseProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-LHL-W6ParseProject/Pods-LHL-W6ParseProject.release.xcconfig"; sourceTree = "<group>"; };
 		823B66CB43FB60751639645D /* Pods-LHL-W6ParseProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LHL-W6ParseProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LHL-W6ParseProject/Pods-LHL-W6ParseProject.debug.xcconfig"; sourceTree = "<group>"; };
+		9638C74C1D0B8785003D06DC /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		9638C7501D0B8D99003D06DC /* LHL-W6ParseProject.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "LHL-W6ParseProject.entitlements"; sourceTree = "<group>"; };
 		96A350E91D09F36F008B3F98 /* RoomTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomTableViewController.h; sourceTree = "<group>"; };
 		96A350EA1D09F36F008B3F98 /* RoomTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomTableViewController.m; sourceTree = "<group>"; };
 		96FF9ACA1D08A363000B3967 /* LHL-W6ParseProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LHL-W6ParseProject.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -51,6 +54,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				96FF9AF81D08EF04000B3967 /* CoreLocation.framework in Frameworks */,
+				9638C74D1D0B8785003D06DC /* MapKit.framework in Frameworks */,
 				A5F8DBE385743B1C5279BA32 /* Pods_LHL_W6ParseProject.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -79,6 +83,7 @@
 		96FF9ACC1D08A363000B3967 /* LHL-W6ParseProject */ = {
 			isa = PBXGroup;
 			children = (
+				9638C7501D0B8D99003D06DC /* LHL-W6ParseProject.entitlements */,
 				96FF9AD01D08A363000B3967 /* AppDelegate.h */,
 				96FF9AD11D08A363000B3967 /* AppDelegate.m */,
 				96FF9AF11D08EB5A000B3967 /* AddViewController.h */,
@@ -110,6 +115,7 @@
 		A58692626D141BF9EC3EC047 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9638C74C1D0B8785003D06DC /* MapKit.framework */,
 				96FF9AF71D08EF04000B3967 /* CoreLocation.framework */,
 				0DC5D296BBABBC6332C7B95C /* Pods_LHL_W6ParseProject.framework */,
 			);
@@ -160,6 +166,14 @@
 					96FF9AC91D08A363000B3967 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = 6A3B9S8TK9;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+							com.apple.WAC = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
