@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-
+#import "Room.h"
 @interface AppDelegate ()
 
 @end
@@ -17,6 +17,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    [Room registerSubclass];
+    
     // Override point for customization after application launch.
     [Parse setApplicationId:@"VeLp6bXvqwi8GaYYSx2RHP9Bh4ydfemvsaJXFPWv"
                   clientKey:@"ZYMEPgiTTXVrjwsSojSdjA2mT7xzJubZWVOYZ2xD"];

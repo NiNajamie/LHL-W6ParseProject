@@ -10,4 +10,14 @@
 
 @implementation Room
 
+// create accessor methods(getter, setter)
+@synthesize name;
+@synthesize address;
+@synthesize postedBy;
+//@synthesize
+
++ (NSString *)parseClassName {
+    return @"Room";
+}
+
 @end

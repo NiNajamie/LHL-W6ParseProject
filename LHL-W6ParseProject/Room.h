@@ -8,11 +8,13 @@
 
 #import <Parse/Parse.h>
 
-@interface Room : PFObject
+@interface Room : PFObject<PFSubclassing>
 
 @property (nonatomic) NSString *name;
 @property (nonatomic) NSString *address;
-@property (nonatomic) PFFile *mapFile;
+@property (nonatomic) NSString *postedBy;
+
+//@property (nonatomic) PFFile *mapFile;
 
 
 @end

@@ -9,13 +9,14 @@
 #import "AddViewController.h"
 #import "Room.h"
 
-@interface AddViewController ()
+@interface AddViewController ()<MKMapViewDelegate>
 
 @property (nonatomic) CLLocationManager *locationManager;
 //@property (nonatomic) CLGeocoder *geocoder;
 @property (nonatomic) CLPlacemark *placemark;
 
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
+//@property (weak, nonatomic) IBOutlet UITextField *postedByTextField;
 
 @end
 
@@ -25,7 +26,11 @@
     [super viewDidLoad];
     
     self.nameTextField.delegate = self;
+//    self.postedByTextField.delegate = self;
+    
     self.locationManager.delegate = self;
+    
+    self.mapView.delegate = self;
     
     [self.locationManager requestAlwaysAuthorization];
     
@@ -36,7 +41,7 @@
     MKPointAnnotation *lhl = [[MKPointAnnotation alloc] init];
     lhl.title = @"Lighthouse Labs";
     lhl.subtitle = @"128 W.Hastings Street, Vancouver, BC, Canada";
-    lhl.coordinate = CLLocationCoordinate2DMake(49.281887, -123.108188);
+//    lhl.coordinate = CLLocationCoordinate2DMake(49.281887, -123.108188);
     
     // add pin in the map
     [self.mapView addAnnotation:lhl];
@@ -90,31 +95,98 @@
              
              self.addressLabel.text = [NSString stringWithFormat:@" %@ %@\n %@ %@\n %@\n %@",firstPlace.subThoroughfare, firstPlace.thoroughfare, firstPlace.postalCode, firstPlace.locality, firstPlace.administrativeArea, firstPlace.country];
              
-             NSLog(@"%@ %@\n %@ %@\n %@\n %@",firstPlace.addressDictionary, firstPlace.thoroughfare, firstPlace.postalCode, firstPlace.locality, firstPlace.administrativeArea, firstPlace.country);
-             
+//             NSLog(@"%@ %@\n %@ %@\n %@\n %@",firstPlace.addressDictionary, firstPlace.thoroughfare, firstPlace.postalCode, firstPlace.locality, firstPlace.administrativeArea, firstPlace.country);
          }];
     }];
 }
 
-
 #pragma mark - CLLocationManagerDelegate
 
+//
+//#pragma mark - MapView Delegate
+//// returns the view associated with the annotation object, and setting this view to be draggable
+//-(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id)annotation {
+//    
+//    MKPinAnnotationView *pin = (MKPinAnnotationView *)[self.mapView dequeueReusableAnnotationViewWithIdentifier:@"pin"];
+//    
+//    if(!pin) {
+//        pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"pin"];
+//    } else {
+//        pin.annotation = annotation;
+//    }
+//    
+//    pin.draggable = YES;
+//    
+//    return pin;  
+//}
 
+
+
+#pragma mark - Uploading data to Parse
 - (IBAction)saveButtonPressed:(UIButton *)sender {
     
-//    // create new room object
+    // create new room object
 //    PFObject *room = [[PFObject alloc] initWithClassName:@"Room"];
 //    [room setObject:self.nameTextField.text forKey:@"name"];
 //    [room setObject:self.addressLabel.text forKey:@"address"];
+//    [room setObject:self.postedByTextField.text forKey:@"postedBy"];
+    
+    // Using Subclassing
+    Room *room = [[Room alloc] init];
+    room.name = self.nameTextField.text;
+    room.address = self.addressLabel.text;
+    
+    
+    // upload recipe to Parse
+    [room saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        
+        if (!error) {
+            // show success msg
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Upload complete"
+                                                                           message:@"Successfully saved the room"
+                                                                    preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK"
+                                                         style:UIAlertActionStyleDefault
+                                                       handler:^(UIAlertAction * action) {
+                                                           // notify table view to reload the rooms from Parse cloud
+                                                           [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshTable" object:self];
+                                                           // dismiss viewController
+                                                           [alert dismissViewControllerAnimated:YES completion:nil];
+
+                                                       }];
+            
+            // add + present(show)VC
+            [alert addAction:ok];
+            [alert presentationController];
+            
+        } else {
+            // show failure msg
+            UIAlertController *alertFailure = [UIAlertController alertControllerWithTitle:@"Upload Failure"
+                                                                                  message:[error localizedDescription]
+                                                                           preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK"
+                                                         style:UIAlertActionStyleDefault
+                                                       handler:^(UIAlertAction * action) {
+                                                       }];
+            [alertFailure addAction:ok];
+            [alertFailure presentationController];
+        }
+    }];
+
+    
 //    [room setObject:self.mapView forKey:@"mapview"];
     
 }
+
+
 - (void)viewDidUnload {
-//    [self setNameTextField:nil];
-//    [self setMapView:nil];
-//    [self setAddressLabel:nil];
-//    
-//    [super viewDidUnload];
+    [self setNameTextField:nil];
+    [self setAddressLabel:nil];
+    
+    //    [self setMapView:nil];
+    [super viewDidUnload];
 }
 
 

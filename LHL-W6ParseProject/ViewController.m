@@ -26,9 +26,9 @@
     
     // create new UserObject
     PFUser *user = [PFUser user];
-    user.username = @"asuka";
-    user.password = @"asuka's pass";
-    user.email = @"asuka@example.com";
+    user.username = @"sakura";
+    user.password = @"sakura's pass";
+    user.email = @"sakura@example.com";
     
 //    // other fields can be set just like with PFObject
 //    user[@"phone"] = @"415-392-0202";
@@ -47,22 +47,32 @@
                                                        }];
             // add & present(show)VC
             [alert addAction:ok];
-            [alert presentationController];
+            [self presentViewController:alert animated:YES completion:nil];
             
         } else {
             // Show the errorString somewhere and let the user try again.
-            NSString *errorString = [error userInfo][@"error"];
+//            NSString *errorString = [error userInfo][@"error"];
+//            
+//            UIAlertController *errorAlert = [UIAlertController alertControllerWithTitle:@"Error"
+//                                                                                message:@"Your input was invalid."
+//                                                                         preferredStyle:UIAlertControllerStyleAlert];
+//            
+//            UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK"
+//                                                         style:UIAlertActionStyleDefault
+//                                                       handler:^(UIAlertAction *action) {
+//                                 }];
+//            [errorAlert addAction:ok];
+//            [self presentViewController:errorAlert animated:YES completion:nil];
             
-            UIAlertController *errorAlert = [UIAlertController alertControllerWithTitle:@"Error"
-                                                                                message:@"Your input was invalid."
-                                                                         preferredStyle:UIAlertControllerStyleAlert];
-            
-            UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK"
-                                                         style:UIAlertActionStyleDefault
-                                                       handler:^(UIAlertAction *action) {
-                                 }];
-            [errorAlert addAction:ok];
-            [errorAlert presentationController];
+            [PFUser logInWithUsernameInBackground:user.username password:user.password block:^(PFUser * _Nullable user, NSError * _Nullable error) {
+                
+                if (!error){
+                    NSLog(@"Successfully logged in");
+                }else {
+                    NSLog(@"Error in login");
+                }
+                
+            }];
 
         }
     }];
