@@ -41,7 +41,7 @@
     MKPointAnnotation *lhl = [[MKPointAnnotation alloc] init];
     lhl.title = @"Lighthouse Labs";
     lhl.subtitle = @"128 W.Hastings Street, Vancouver, BC, Canada";
-//    lhl.coordinate = CLLocationCoordinate2DMake(49.281887, -123.108188);
+    lhl.coordinate = CLLocationCoordinate2DMake(49.281887, -123.108188);
     
     // add pin in the map
     [self.mapView addAnnotation:lhl];
@@ -102,23 +102,63 @@
 
 #pragma mark - CLLocationManagerDelegate
 
-//
-//#pragma mark - MapView Delegate
-//// returns the view associated with the annotation object, and setting this view to be draggable
-//-(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id)annotation {
-//    
-//    MKPinAnnotationView *pin = (MKPinAnnotationView *)[self.mapView dequeueReusableAnnotationViewWithIdentifier:@"pin"];
-//    
-//    if(!pin) {
-//        pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"pin"];
-//    } else {
-//        pin.annotation = annotation;
-//    }
-//    
-//    pin.draggable = YES;
-//    
-//    return pin;  
-//}
+
+#pragma mark - MapView Delegate
+// returns the view associated with the annotation object, and setting this view to be draggable
+-(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id)annotation {
+    
+    MKPinAnnotationView *pin = (MKPinAnnotationView *)[self.mapView dequeueReusableAnnotationViewWithIdentifier:@"pin"];
+    
+    if(!pin) {
+        pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"pin"];
+    } else {
+        pin.annotation = annotation;
+    }
+    
+    pin.draggable = YES;
+    
+    return pin;
+}
+
+// dragging a pin on the map
+-(void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)annotationView didChangeDragState:(MKAnnotationViewDragState)newState fromOldState:(MKAnnotationViewDragState)oldState {
+    
+    if(newState == MKAnnotationViewDragStateEnding)  {
+//            NSLog(@"%f, %f", self.mapView.annotations.latitude, mapView.coordinate.longitude);
+        CGPoint dropPoint = CGPointMake(annotationView.center.x, annotationView.center.y);
+        
+        // drop a pin in the map
+        CLLocationCoordinate2D newCoordinate = [self.mapView convertPoint:dropPoint toCoordinateFromView:annotationView.superview];
+        [annotationView.annotation setCoordinate:newCoordinate];
+        NSLog(@"%f %f", newCoordinate.latitude, newCoordinate.longitude);
+        
+        
+        
+        CLGeocoder *geocoder1 = [[CLGeocoder alloc] init];
+        
+        CLLocation *location = [[CLLocation alloc] initWithLatitude:newCoordinate.latitude longitude:newCoordinate.longitude];
+        
+            // Submits a reverse-geocoding request for the specified location.
+            [geocoder1 reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
+                
+                if (!error) {
+                    
+                    for (CLPlacemark *aPlacemark in placemarks)
+                    {
+                        NSLog(@"Address: %@, postalCode: %@, province:%@", aPlacemark.name, [aPlacemark postalCode], [aPlacemark administrativeArea]);
+//                        NSLog(@"lat: %f\nlong: %f",aPlacemark.location.coordinate.latitude,aPlacemark.location.coordinate.longitude);
+                       
+                        self.addressLabel.text = [NSString stringWithFormat:@"%@, %@, %@", aPlacemark.name, aPlacemark.postalCode, aPlacemark.administrativeArea];
+                    }
+                }
+                else{
+                    NSLog(@"error: %@",[error localizedDescription]);
+                }
+            }];
+//        }];
+    }
+
+}
 
 
 
@@ -137,7 +177,7 @@
     room.address = self.addressLabel.text;
     
     
-    // upload recipe to Parse
+    // upload to Parse
     [room saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         
         if (!error) {
@@ -179,7 +219,6 @@
 //    [room setObject:self.mapView forKey:@"mapview"];
     
 }
-
 
 - (void)viewDidUnload {
     [self setNameTextField:nil];
