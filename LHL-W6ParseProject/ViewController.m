@@ -26,9 +26,9 @@
     
     // create new UserObject
     PFUser *user = [PFUser user];
-    user.username = @"sakura";
-    user.password = @"sakura's pass";
-    user.email = @"sakura@example.com";
+    user.username = @"asuka";
+    user.password = @"asuka's pass";
+    user.email = @"asuka@example.com";
     
 //    // other fields can be set just like with PFObject
 //    user[@"phone"] = @"415-392-0202";

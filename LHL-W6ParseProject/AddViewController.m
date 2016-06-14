@@ -9,6 +9,8 @@
 #import "AddViewController.h"
 #import "Room.h"
 
+@class ViewController;
+
 @interface AddViewController ()<MKMapViewDelegate>
 
 @property (nonatomic) CLLocationManager *locationManager;
@@ -145,10 +147,10 @@
                     
                     for (CLPlacemark *aPlacemark in placemarks)
                     {
-                        NSLog(@"Address: %@, postalCode: %@, province:%@", aPlacemark.name, [aPlacemark postalCode], [aPlacemark administrativeArea]);
+                        NSLog(@"Address: %@, locality: %@, province:%@", aPlacemark.name, [aPlacemark locality], [aPlacemark administrativeArea]);
 //                        NSLog(@"lat: %f\nlong: %f",aPlacemark.location.coordinate.latitude,aPlacemark.location.coordinate.longitude);
                        
-                        self.addressLabel.text = [NSString stringWithFormat:@"%@, %@, %@", aPlacemark.name, aPlacemark.postalCode, aPlacemark.administrativeArea];
+                        self.addressLabel.text = [NSString stringWithFormat:@" %@,\n %@\n %@\n", aPlacemark.name, aPlacemark.locality, aPlacemark.administrativeArea];
                     }
                 }
                 else{
@@ -159,8 +161,6 @@
     }
 
 }
-
-
 
 #pragma mark - Uploading data to Parse
 - (IBAction)saveButtonPressed:(UIButton *)sender {
@@ -176,6 +176,8 @@
     room.name = self.nameTextField.text;
     room.address = self.addressLabel.text;
     
+    // currentUser contains dictionary of the user information
+    room.postedBy = PFUser.currentUser.username;
     
     // upload to Parse
     [room saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
@@ -189,6 +191,7 @@
             UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK"
                                                          style:UIAlertActionStyleDefault
                                                        handler:^(UIAlertAction * action) {
+                                                           
                                                            // notify table view to reload the rooms from Parse cloud
                                                            [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshTable" object:self];
                                                            // dismiss viewController
@@ -198,7 +201,7 @@
             
             // add + present(show)VC
             [alert addAction:ok];
-            [alert presentationController];
+            [self presentViewController:alert animated:YES completion:nil];
             
         } else {
             // show failure msg
@@ -211,7 +214,7 @@
                                                        handler:^(UIAlertAction * action) {
                                                        }];
             [alertFailure addAction:ok];
-            [alertFailure presentationController];
+            [self presentViewController:alertFailure animated:YES completion:nil];
         }
     }];
 

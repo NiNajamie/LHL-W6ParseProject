@@ -10,11 +10,15 @@
 
 @implementation Room
 
-// create accessor methods(getter, setter)
-@synthesize name;
-@synthesize address;
-@synthesize postedBy;
+// Declare a property as you normally would, but use @dynamic rather than @synthesize in your .m file.
+@dynamic name;
+@dynamic address;
+@dynamic postedBy;
 //@synthesize
+
+//+ (void)load {
+//    [self registerSubclass];
+//}
 
 + (NSString *)parseClassName {
     return @"Room";

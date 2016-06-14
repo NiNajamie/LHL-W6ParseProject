@@ -10,6 +10,7 @@
 
 @interface Room : PFObject<PFSubclassing>
 
+
 @property (nonatomic) NSString *name;
 @property (nonatomic) NSString *address;
 @property (nonatomic) NSString *postedBy;
