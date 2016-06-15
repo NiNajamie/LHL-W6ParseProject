@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		9638C74D1D0B8785003D06DC /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9638C74C1D0B8785003D06DC /* MapKit.framework */; };
 		96A350EB1D09F36F008B3F98 /* RoomTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96A350EA1D09F36F008B3F98 /* RoomTableViewController.m */; };
+		96FB049B1D10EAC200B09D5A /* DetaildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96FB049A1D10EAC200B09D5A /* DetaildViewController.m */; };
+		96FB049E1D10FCFA00B09D5A /* RoomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 96FB049D1D10FCFA00B09D5A /* RoomTableViewCell.m */; };
 		96FF9ACF1D08A363000B3967 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 96FF9ACE1D08A363000B3967 /* main.m */; };
 		96FF9AD21D08A363000B3967 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 96FF9AD11D08A363000B3967 /* AppDelegate.m */; };
 		96FF9AD51D08A363000B3967 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96FF9AD41D08A363000B3967 /* ViewController.m */; };
@@ -30,6 +32,10 @@
 		9638C7501D0B8D99003D06DC /* LHL-W6ParseProject.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "LHL-W6ParseProject.entitlements"; sourceTree = "<group>"; };
 		96A350E91D09F36F008B3F98 /* RoomTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomTableViewController.h; sourceTree = "<group>"; };
 		96A350EA1D09F36F008B3F98 /* RoomTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomTableViewController.m; sourceTree = "<group>"; };
+		96FB04991D10EAC200B09D5A /* DetaildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetaildViewController.h; sourceTree = "<group>"; };
+		96FB049A1D10EAC200B09D5A /* DetaildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetaildViewController.m; sourceTree = "<group>"; };
+		96FB049C1D10FCFA00B09D5A /* RoomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomTableViewCell.h; sourceTree = "<group>"; };
+		96FB049D1D10FCFA00B09D5A /* RoomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomTableViewCell.m; sourceTree = "<group>"; };
 		96FF9ACA1D08A363000B3967 /* LHL-W6ParseProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LHL-W6ParseProject.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		96FF9ACE1D08A363000B3967 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		96FF9AD01D08A363000B3967 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -86,8 +92,12 @@
 				9638C7501D0B8D99003D06DC /* LHL-W6ParseProject.entitlements */,
 				96FF9AD01D08A363000B3967 /* AppDelegate.h */,
 				96FF9AD11D08A363000B3967 /* AppDelegate.m */,
+				96FB04991D10EAC200B09D5A /* DetaildViewController.h */,
+				96FB049A1D10EAC200B09D5A /* DetaildViewController.m */,
 				96FF9AF11D08EB5A000B3967 /* AddViewController.h */,
 				96FF9AF21D08EB5A000B3967 /* AddViewController.m */,
+				96FB049C1D10FCFA00B09D5A /* RoomTableViewCell.h */,
+				96FB049D1D10FCFA00B09D5A /* RoomTableViewCell.m */,
 				96A350E91D09F36F008B3F98 /* RoomTableViewController.h */,
 				96A350EA1D09F36F008B3F98 /* RoomTableViewController.m */,
 				96FF9AD31D08A363000B3967 /* ViewController.h */,
@@ -261,6 +271,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96FB049B1D10EAC200B09D5A /* DetaildViewController.m in Sources */,
 				96FF9AEC1D08D1BD000B3967 /* Room.m in Sources */,
 				96FF9AD51D08A363000B3967 /* ViewController.m in Sources */,
 				96FF9AF31D08EB5A000B3967 /* AddViewController.m in Sources */,
@@ -268,6 +279,7 @@
 				96A350EB1D09F36F008B3F98 /* RoomTableViewController.m in Sources */,
 				96FF9AD21D08A363000B3967 /* AppDelegate.m in Sources */,
 				96FF9ACF1D08A363000B3967 /* main.m in Sources */,
+				96FB049E1D10FCFA00B09D5A /* RoomTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

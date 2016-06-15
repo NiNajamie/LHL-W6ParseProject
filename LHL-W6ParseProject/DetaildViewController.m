@@ -1,93 +1,58 @@
 //
-//  RoomTableViewController.m
+//  DetaildViewController.m
 //  LHL-W6ParseProject
 //
-//  Created by Asuka Nakagawa on 2016-06-09.
+//  Created by Asuka Nakagawa on 2016-06-14.
 //  Copyright © 2016 Asuka Nakagawa. All rights reserved.
 //
 
-#import "RoomTableViewController.h"
-#import "Room.h"
 #import "DetaildViewController.h"
-#import "RoomTableViewCell.h"
+@class Room;
 
-
-@interface RoomTableViewController ()
-
+@interface DetaildViewController ()
 
 @end
 
-@implementation RoomTableViewController
 
-- (id)initWithCoder:(NSCoder *)aCoder {
-    
-    self = [super initWithCoder:aCoder];
-    if (self) {
-        // The className to query on
-        self.parseClassName = @"Room";
-        
-        // The key of the PFObject to display in the label of the default cell style
-        self.textKey = @"name";
-        
-        // Whether the built-in pull-to-refresh is enabled
-        self.pullToRefreshEnabled = YES;
-        
-        // Whether the built-in pagination is enabled
-        self.paginationEnabled = YES;
-        
-        // by default, it shows 25objects/page ->10
-        self.objectsPerPage = 10;
-    }
-    return self;
-}
-
+@implementation DetaildViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(refreshTable:)
-                                                 name:@"refreshTable"
-                                               object:nil];
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-
+    //  get data from Parse for displaying
+//    self.nameLabel.text = room.name;
+//    self.addressLabel.text = room.address;
+//    self.postedByLabel.text = room.postedBy;
+    
+//     Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+//     self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
--(void)refreshTable:(NSNotification*) notification {
-//    // reload the rooms
-//    [self loadObjects];
-}
-
-//
-//-(void)viewDidUnload {
-//    // Release any retained subviews of the main view.
-//    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"refreshTable" object:nil];
-//    [super viewDidUnload];
-//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-
-
 #pragma mark - Table view data source
+
 //- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 //    return 1;
 //}
+//
+
+//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+//    return 3;
+//}
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(nullable PFObject *)object {
-    RoomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-    
-    // casting object to subclass of Room
-    cell.roomNameLabel.text = ((Room*)object).name;
-    cell.postedByLabel.text = ((Room*)object).postedBy;
-    
-    return cell;
-}
+//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    
+//    
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+//    
+//    return cell;
+//}
 
 /*
 // Override to support conditional editing of the table view.

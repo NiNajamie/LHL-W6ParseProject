@@ -8,11 +8,14 @@
 
 #import "AddViewController.h"
 #import "Room.h"
+#import "RoomTableViewController.h"
+
 
 @class ViewController;
 
 @interface AddViewController ()<MKMapViewDelegate>
 
+@property (nonatomic) PFGeoPoint *latLon;
 @property (nonatomic) CLLocationManager *locationManager;
 //@property (nonatomic) CLGeocoder *geocoder;
 @property (nonatomic) CLPlacemark *placemark;
@@ -52,7 +55,7 @@
     CLLocationCoordinate2D aLocation = lhl.coordinate;
     
     // set distance from aLocation, 200x200<- too close
-    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(aLocation, 2000, 2000);
+    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(aLocation, 2500, 2500);
 //    
 //    // Adjusts the aspect ratio of the specified region to ensure that it fits in the map view’s frame.
     MKCoordinateRegion adjustRegion = [self.mapView regionThatFits:viewRegion];
@@ -132,9 +135,7 @@
         // drop a pin in the map
         CLLocationCoordinate2D newCoordinate = [self.mapView convertPoint:dropPoint toCoordinateFromView:annotationView.superview];
         [annotationView.annotation setCoordinate:newCoordinate];
-        NSLog(@"%f %f", newCoordinate.latitude, newCoordinate.longitude);
-        
-        
+        NSLog(@"latitude: %f longitude: %f", newCoordinate.latitude, newCoordinate.longitude);
         
         CLGeocoder *geocoder1 = [[CLGeocoder alloc] init];
         
@@ -148,9 +149,11 @@
                     for (CLPlacemark *aPlacemark in placemarks)
                     {
                         NSLog(@"Address: %@, locality: %@, province:%@", aPlacemark.name, [aPlacemark locality], [aPlacemark administrativeArea]);
-//                        NSLog(@"lat: %f\nlong: %f",aPlacemark.location.coordinate.latitude,aPlacemark.location.coordinate.longitude);
+                        NSLog(@"lat: %f\nlong: %f",aPlacemark.location.coordinate.latitude,aPlacemark.location.coordinate.longitude);
                        
                         self.addressLabel.text = [NSString stringWithFormat:@" %@,\n %@\n %@\n", aPlacemark.name, aPlacemark.locality, aPlacemark.administrativeArea];
+                        
+                        self.latLon = [PFGeoPoint geoPointWithLatitude:aPlacemark.location.coordinate.latitude longitude:aPlacemark.location.coordinate.longitude];
                     }
                 }
                 else{
@@ -175,6 +178,9 @@
     Room *room = [[Room alloc] init];
     room.name = self.nameTextField.text;
     room.address = self.addressLabel.text;
+    room.latAndLon = self.latLon;
+    
+    
     
     // currentUser contains dictionary of the user information
     room.postedBy = PFUser.currentUser.username;
@@ -196,7 +202,6 @@
                                                            [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshTable" object:self];
                                                            // dismiss viewController
                                                            [alert dismissViewControllerAnimated:YES completion:nil];
-
                                                        }];
             
             // add + present(show)VC
@@ -217,30 +222,31 @@
             [self presentViewController:alertFailure animated:YES completion:nil];
         }
     }];
-
+    
     
 //    [room setObject:self.mapView forKey:@"mapview"];
     
 }
 
-- (void)viewDidUnload {
-    [self setNameTextField:nil];
-    [self setAddressLabel:nil];
-    
-    //    [self setMapView:nil];
-    [super viewDidUnload];
-}
+//- (void)viewDidUnload {
+//    [self setNameTextField:nil];
+//    [self setAddressLabel:nil];
+//    //    [self setMapView:nil];
+//    [super viewDidUnload];
+//}
 
+#pragma mark - Navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+    
+//    RoomTableViewController *dvc = segue.destinationViewController;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
 
 @end

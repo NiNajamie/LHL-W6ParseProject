@@ -14,6 +14,9 @@
 @dynamic name;
 @dynamic address;
 @dynamic postedBy;
+@dynamic latAndLon;
+
+//@dynamic roomArray;
 //@synthesize
 
 //+ (void)load {

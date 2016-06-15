@@ -14,6 +14,9 @@
 @property (nonatomic) NSString *name;
 @property (nonatomic) NSString *address;
 @property (nonatomic) NSString *postedBy;
+@property (nonatomic) PFGeoPoint *latAndLon;
+
+//@property (nonatomic) NSArray *roomArray;
 
 //@property (nonatomic) PFFile *mapFile;
 
