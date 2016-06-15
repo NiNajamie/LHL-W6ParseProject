@@ -8,6 +8,7 @@
 
 #import "DetaildViewController.h"
 #import "Room.h"
+#import "AddViewController.h"
 
 @interface DetaildViewController ()
 
@@ -19,40 +20,38 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    PFQuery *query = [Room query];
-    [query includeKey:@"postedBy"];
-    
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        
-        if (!error) {
-            
-            // The find succeeded.
-            NSLog(@"Successfully retrieved %lu rooms", (unsigned long)objects.count);
-            
-            // Do something with the found objects
-            // PFUser *object, [object Key:@"name"]-> Room *room
-            for (Room *room in objects) {
-                
-                NSLog(@"%@",room.name);
-                self.nameLabel.text = room.name;
-                self.postedByLabel.text = room.postedBy.username;
-                self.addressLabel.text = room.address;
-            }
-        } else {
-            // Log details of the failure
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
-        }
-    }];
-    //  get data from Parse for displaying
-    //  self.nameLabel.text = room.name;
-    //  self.addressLabel.text = room.address;
-    //  self.postedByLabel.text = room.postedBy;
-    
-
+    self.nameLabel.text = self.room.name;
+    self.addressLabel.text = self.room.address;
     
     
-//     Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-//     self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+//    PFQuery *query = [Room query];
+//    [query includeKey:@"postedBy"];
+//    [query whereKey:"name" equalTo:"inlet"];
+//    
+//    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+//        
+//        if (!error) {
+//            
+//            // The find succeeded.
+//            NSLog(@"Successfully retrieved %lu rooms", (unsigned long)objects.count);
+//            
+//            // Do something with the found objects
+//            // PFUser *object, [object Key:@"name"]-> Room *room
+//            for (Room *room in objects) {
+//                
+//                NSLog(@"%@",room.name);
+//                
+//                // get data from Parse for displaying
+//                self.nameLabel.text = room.name;
+//                self.postedByLabel.text = room.postedBy.username;
+//                self.addressLabel.text = room.address;
+//            }
+//        } else {
+//            // Log details of the failure
+//            NSLog(@"Error: %@ %@", error, [error userInfo]);
+//        }
+//    }];
 }
 
 

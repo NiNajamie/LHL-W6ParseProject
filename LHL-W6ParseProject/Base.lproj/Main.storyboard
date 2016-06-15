@@ -130,7 +130,7 @@
                                 <connections>
                                     <outlet property="postedByLabel" destination="Nsq-Nx-1Zr" id="Sed-nq-4cc"/>
                                     <outlet property="roomNameLabel" destination="zBr-zc-u0B" id="ogK-Q2-vib"/>
-                                    <segue destination="exW-Hb-qlk" kind="push" id="PHW-zS-TWH"/>
+                                    <segue destination="exW-Hb-qlk" kind="push" identifier="DetaildIdentifier" id="PHW-zS-TWH"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -164,16 +164,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="nameLabel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wXf-lc-AkB">
-                                <rect key="frame" x="145" y="342" width="85" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="85" id="3gg-Q6-tZl"/>
-                                    <constraint firstAttribute="height" constant="21" id="f7v-PO-Pbc"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="addressLabel" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eyn-cz-48q">
                                 <rect key="frame" x="90" y="385" width="195" height="102"/>
                                 <constraints>
@@ -201,6 +191,16 @@
                                     <constraint firstAttribute="height" constant="21" id="TMi-FE-LAX"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="nameLabel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wXf-lc-AkB">
+                                <rect key="frame" x="80" y="342" width="215" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="215" id="N07-4j-Hfs"/>
+                                    <constraint firstAttribute="height" constant="21" id="f7v-PO-Pbc"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>

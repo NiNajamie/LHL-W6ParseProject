@@ -77,15 +77,15 @@
 //- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 //    return 1;
 //}
-
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(nullable PFObject *)object {
+    
     RoomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
-    Room *room = (Room*) object;
     
     // casting object to subclass of Room
     // cell.roomNameLabel.text = ((Room*)object).name
+    
+    Room *room = (Room*) object;
     
     cell.roomNameLabel.text = room.name;
     cell.postedByLabel.text = room.postedBy.username;
@@ -96,6 +96,7 @@
 -(PFQuery *)queryForTable {
 //    PFQuery *query = [PFQuery queryWithClassName:@"Room"];
     
+    // there is an array of userInfo in the postedBy:pointer
     PFQuery *query = [Room query];
     [query includeKey:@"postedBy"];
     return query;
@@ -136,14 +137,30 @@
 }
 */
 
-/*
 #pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    
+    if ([segue.identifier isEqualToString:@"DetaildIdentifier"]) {
+        
+        DetaildViewController *dvc = segue.destinationViewController;
+        
+        RoomTableViewCell *cell = sender;
+        
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        
+        //        PFQuery *query = [self queryForTable];
+        
+        // create room Object, set as object in the array of Room objects
+        Room *room = [self.objects objectAtIndex:indexPath.row];
+        
+        // set specific cell has specific data
+        //        dvc.room = query.room;
+        
+        // 1. inside the DetailedVC, create new Property(to pass room object from roomTableVC to dvc)
+        dvc.room = room;
+
+    }
 }
-*/
+
 
 @end

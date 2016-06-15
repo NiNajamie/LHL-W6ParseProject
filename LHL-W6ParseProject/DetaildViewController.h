@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
+#import "Room.h"
 
 // UITableViewController-> UIVC
 @interface DetaildViewController : UIViewController
@@ -17,6 +18,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;
 @property (weak, nonatomic) IBOutlet UILabel *postedByLabel;
 
-
+@property (nonatomic) Room *room;
 
 @end
