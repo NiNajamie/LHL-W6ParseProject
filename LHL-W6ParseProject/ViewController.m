@@ -26,12 +26,9 @@
     
     // create new UserObject
     PFUser *user = [PFUser user];
-    user.username = @"asuka";
-    user.password = @"asuka's pass";
-    user.email = @"asuka@example.com";
-    
-//    // other fields can be set just like with PFObject
-//    user[@"phone"] = @"415-392-0202";
+    user.username = @"will";
+    user.password = @"will's pass";
+    user.email = @"will@example.com";
     
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         

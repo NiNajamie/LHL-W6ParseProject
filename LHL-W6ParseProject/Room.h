@@ -13,7 +13,7 @@
 
 @property (nonatomic) NSString *name;
 @property (nonatomic) NSString *address;
-@property (nonatomic) NSString *postedBy;
+@property (nonatomic) PFUser *postedBy;
 @property (nonatomic) PFGeoPoint *latAndLon;
 
 //@property (nonatomic) NSArray *roomArray;

@@ -183,7 +183,7 @@
     
     
     // currentUser contains dictionary of the user information
-    room.postedBy = PFUser.currentUser.username;
+    room.postedBy = [PFUser currentUser];
     
     // upload to Parse
     [room saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {

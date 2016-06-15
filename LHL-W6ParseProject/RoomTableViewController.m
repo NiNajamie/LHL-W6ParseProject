@@ -82,11 +82,24 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(nullable PFObject *)object {
     RoomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
+    Room *room = (Room*) object;
+    
     // casting object to subclass of Room
-    cell.roomNameLabel.text = ((Room*)object).name;
-    cell.postedByLabel.text = ((Room*)object).postedBy;
+    // cell.roomNameLabel.text = ((Room*)object).name
+    
+    cell.roomNameLabel.text = room.name;
+    cell.postedByLabel.text = room.postedBy.username;
     
     return cell;
+}
+
+-(PFQuery *)queryForTable {
+//    PFQuery *query = [PFQuery queryWithClassName:@"Room"];
+    
+    PFQuery *query = [Room query];
+    [query includeKey:@"postedBy"];
+    return query;
+
 }
 
 /*
