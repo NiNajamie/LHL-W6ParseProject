@@ -22,8 +22,7 @@
     
     self.nameLabel.text = self.room.name;
     self.addressLabel.text = self.room.address;
-    
-    
+    self.postedByLabel.text = self.room.postedBy.username;
     
 //    PFQuery *query = [Room query];
 //    [query includeKey:@"postedBy"];

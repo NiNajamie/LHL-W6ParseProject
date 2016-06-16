@@ -154,7 +154,7 @@
         Room *room = [self.objects objectAtIndex:indexPath.row];
         
         // set specific cell has specific data
-        //        dvc.room = query.room;
+        //  dvc.room = query.room;
         
         // 1. inside the DetailedVC, create new Property(to pass room object from roomTableVC to dvc)
         dvc.room = room;
