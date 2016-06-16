@@ -24,33 +24,7 @@
     self.addressLabel.text = self.room.address;
     self.postedByLabel.text = self.room.postedBy.username;
     
-//    PFQuery *query = [Room query];
-//    [query includeKey:@"postedBy"];
-//    [query whereKey:"name" equalTo:"inlet"];
-//    
-//    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-//        
-//        if (!error) {
-//            
-//            // The find succeeded.
-//            NSLog(@"Successfully retrieved %lu rooms", (unsigned long)objects.count);
-//            
-//            // Do something with the found objects
-//            // PFUser *object, [object Key:@"name"]-> Room *room
-//            for (Room *room in objects) {
-//                
-//                NSLog(@"%@",room.name);
-//                
-//                // get data from Parse for displaying
-//                self.nameLabel.text = room.name;
-//                self.postedByLabel.text = room.postedBy.username;
-//                self.addressLabel.text = room.address;
-//            }
-//        } else {
-//            // Log details of the failure
-//            NSLog(@"Error: %@ %@", error, [error userInfo]);
-//        }
-//    }];
+//    self.imageView.image = [UIImage imageNamed:@"bedroom3"];
 }
 
 

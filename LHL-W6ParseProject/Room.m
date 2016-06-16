@@ -15,6 +15,7 @@
 @dynamic address;
 @dynamic postedBy;
 @dynamic latAndLon;
+@dynamic imagePhoto;
 
 //@dynamic roomArray;
 //@synthesize
