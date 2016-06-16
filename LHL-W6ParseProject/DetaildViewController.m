@@ -12,6 +12,7 @@
 
 @interface DetaildViewController ()
 
+
 @end
 
 

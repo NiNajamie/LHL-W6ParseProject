@@ -13,4 +13,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *roomNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *postedByLabel;
 
+@property (weak, nonatomic) IBOutlet UIImageView *imageFile;
+
+
 @end

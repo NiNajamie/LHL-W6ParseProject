@@ -55,7 +55,7 @@
     CLLocationCoordinate2D aLocation = lhl.coordinate;
     
     // set distance from aLocation, 200x200<- too close
-    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(aLocation, 2500, 2500);
+    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(aLocation, 2000, 2000);
 //    
 //    // Adjusts the aspect ratio of the specified region to ensure that it fits in the map view’s frame.
     MKCoordinateRegion adjustRegion = [self.mapView regionThatFits:viewRegion];
@@ -73,9 +73,9 @@
         CLPlacemark *firstPlace = placemarks.firstObject;
         NSLog(@"%@", firstPlace.location);
         
-        self.latitudeLabel.text = [NSString stringWithFormat:@"  %.8f", firstPlace.location.coordinate.latitude];
-        self.longitudeLabel.text = [NSString stringWithFormat:@"%.8f", firstPlace.location.coordinate.longitude];
-        NSLog(@"Latitude: %@, Longitude: %@", self.latitudeLabel.text, self.longitudeLabel.text);
+//        self.latitudeLabel.text = [NSString stringWithFormat:@"  %.8f", firstPlace.location.coordinate.latitude];
+//        self.longitudeLabel.text = [NSString stringWithFormat:@"%.8f", firstPlace.location.coordinate.longitude];
+//        NSLog(@"Latitude: %@, Longitude: %@", self.latitudeLabel.text, self.longitudeLabel.text);
         
         [geocoder reverseGeocodeLocation:firstPlace.location completionHandler:^(NSArray *placemarks, NSError *error) {
             if (!error) {
@@ -103,11 +103,67 @@
 //             NSLog(@"%@ %@\n %@ %@\n %@\n %@",firstPlace.addressDictionary, firstPlace.thoroughfare, firstPlace.postalCode, firstPlace.locality, firstPlace.administrativeArea, firstPlace.country);
          }];
     }];
+    
+    // isSourceTypeAvailable that allows us to check if the device has a built in camera
+    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error"
+                                                                       message:@"Device has no camera"
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK"
+                                                     style:UIAlertActionStyleDefault
+                                                   handler:^(UIAlertAction * action) {
+                                                   }];
+        // add & present(show)VC
+        [alert addAction:ok];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
 }
 
+#pragma mark - PhotoLibary delegate
+- (IBAction)addPhotoPressed:(UIButton *)sender {
+    
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = NO;
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    
+    [self presentViewController:picker animated:YES completion:NULL];
+    
+}
+
+// when user taps "add"Button at the first time, we call photoLibrary[method:(addImageButton)]
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (indexPath.row == 0) {
+        // [self showPhotoLibrary];
+        [self addPhotoPressed:nil];
+    }
+}
+
+#pragma mark - UIImagePickerController delegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    
+    UIImage *originalImage = (UIImage*)[info objectForKey:UIImagePickerControllerOriginalImage];
+    //    UIImage *editedImage = (UIImage*) [info objectForKey:UIImagePickerControllerEditedImage];
+    
+    //selected image is then assigned to the image view of the new recipe.
+    self.imageView.image = originalImage;
+    
+    //    self.recipeImageView.image = editedImage;
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+}
+
+
+
+
 #pragma mark - CLLocationManagerDelegate
-
-
 #pragma mark - MapView Delegate
 // returns the view associated with the annotation object, and setting this view to be draggable
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id)annotation {

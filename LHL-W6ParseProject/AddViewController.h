@@ -9,14 +9,18 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import <Parse/Parse.h>
+#import <ParseUI/ParseUI.h>
 
-@interface AddViewController : UIViewController <CLLocationManagerDelegate, UITextFieldDelegate>
+@interface AddViewController : UIViewController <CLLocationManagerDelegate, UITextFieldDelegate, UIImagePickerControllerDelegate>
 
-@property (weak, nonatomic) IBOutlet UILabel *latitudeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *longitudeLabel;
+//@property (weak, nonatomic) IBOutlet UILabel *latitudeLabel;
+//@property (weak, nonatomic) IBOutlet UILabel *longitudeLabel;
+
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;
-
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
+
+@property (weak, nonatomic) IBOutlet PFImageView *imageView;
 
 
 

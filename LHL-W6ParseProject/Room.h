@@ -16,7 +16,7 @@
 @property (nonatomic) PFUser *postedBy;
 @property (nonatomic) PFGeoPoint *latAndLon;
 
-@property (nonatomic) PFFile *imagePhoto;
+@property (nonatomic) PFFile *imageFile;
 
 //@property (nonatomic) NSArray *roomArray;
 
