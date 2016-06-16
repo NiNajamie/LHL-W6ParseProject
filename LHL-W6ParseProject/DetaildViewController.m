@@ -12,7 +12,6 @@
 
 @interface DetaildViewController ()
 
-
 @end
 
 
@@ -25,7 +24,13 @@
     self.addressLabel.text = self.room.address;
     self.postedByLabel.text = self.room.postedBy.username;
     
-//    self.imageView.image = [UIImage imageNamed:@"bedroom3"];
+    [self.room.imageFile getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
+        
+        UIImage *image = [UIImage imageWithData:data];
+        self.imageView.image = image;
+    }];
+    
+//    self.imageFile.image = [UIImage imageNamed:@"bedroom3"];
 }
 
 

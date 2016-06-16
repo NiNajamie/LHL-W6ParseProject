@@ -18,7 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;
 @property (weak, nonatomic) IBOutlet UILabel *postedByLabel;
 
-@property (weak, nonatomic) IBOutlet UIImageView *imageFile;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
 
 @property (nonatomic) Room *room;

@@ -23,6 +23,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 //@property (weak, nonatomic) IBOutlet UITextField *postedByTextField;
 
+
+@property (nonatomic) PFFile *file;
+
 @end
 
 @implementation AddViewController
@@ -99,8 +102,7 @@
 //           }
              
              self.addressLabel.text = [NSString stringWithFormat:@" %@ %@\n %@ %@\n %@\n %@",firstPlace.subThoroughfare, firstPlace.thoroughfare, firstPlace.postalCode, firstPlace.locality, firstPlace.administrativeArea, firstPlace.country];
-             
-//             NSLog(@"%@ %@\n %@ %@\n %@\n %@",firstPlace.addressDictionary, firstPlace.thoroughfare, firstPlace.postalCode, firstPlace.locality, firstPlace.administrativeArea, firstPlace.country);
+            
          }];
     }];
     
@@ -127,7 +129,7 @@
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
     picker.allowsEditing = NO;
-    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
     
     [self presentViewController:picker animated:YES completion:NULL];
     
@@ -146,13 +148,19 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     
     UIImage *originalImage = (UIImage*)[info objectForKey:UIImagePickerControllerOriginalImage];
-    //    UIImage *editedImage = (UIImage*) [info objectForKey:UIImagePickerControllerEditedImage];
     
-    //selected image is then assigned to the image view of the new recipe.
+    //selected image is then assigned to the image view of the new room.
     self.imageView.image = originalImage;
     
-    //    self.recipeImageView.image = editedImage;
+    // NSData-> PFFile
+    NSData *data = UIImageJPEGRepresentation(originalImage, 0.5f);
+    
+    // PFFile *file = [PFFile fileWithData:data];
+    // self.file = file;
+    self.file = [PFFile fileWithData:data];
+    
     [picker dismissViewControllerAnimated:YES completion:nil];
+
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
@@ -236,10 +244,14 @@
     room.address = self.addressLabel.text;
     room.latAndLon = self.latLon;
     
-    
-    
     // currentUser contains dictionary of the user information
     room.postedBy = [PFUser currentUser];
+    
+    room.imageFile = self.file;
+    
+    
+//    PFFile *savedFile = [PFFile fileWithName:@"image.jpg" data:room.imageFile];
+//    room.imageFile = savedFile;
     
     // upload to Parse
     [room saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
@@ -278,8 +290,6 @@
             [self presentViewController:alertFailure animated:YES completion:nil];
         }
     }];
-    
-    
 //    [room setObject:self.mapView forKey:@"mapview"];
     
 }
