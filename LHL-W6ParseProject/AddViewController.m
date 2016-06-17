@@ -34,6 +34,9 @@
     [super viewDidLoad];
     
     self.nameTextField.delegate = self;
+    
+    
+
 //    self.postedByTextField.delegate = self;
     
     self.locationManager.delegate = self;
@@ -44,8 +47,19 @@
     
 //    [self.locationManager startUpdatingLocation];
     
+    [self setUpMap];
+}
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (textField == self.nameTextField) {
+        [textField resignFirstResponder];
+        return NO;
+    }
+    return YES;
+}
+
+-(void) setUpMap {
     
-    
+
     MKPointAnnotation *lhl = [[MKPointAnnotation alloc] init];
     lhl.title = @"Lighthouse Labs";
     lhl.subtitle = @"128 W.Hastings Street, Vancouver, BC, Canada";
@@ -106,6 +120,9 @@
          }];
     }];
     
+}
+
+-(void)viewDidAppear:(BOOL)animated {
     // isSourceTypeAvailable that allows us to check if the device has a built in camera
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         
@@ -121,6 +138,7 @@
         [alert addAction:ok];
         [self presentViewController:alert animated:YES completion:nil];
     }
+
 }
 
 #pragma mark - PhotoLibary delegate
