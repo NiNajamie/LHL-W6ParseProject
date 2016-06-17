@@ -22,13 +22,14 @@
     
     
     self.nameTextField.delegate = self;
+    self.passwordTextField.delegate = self;
     self.emailTextField.delegate = self;
 }
 
 
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    if (textField == self.nameTextField || textField ==self.emailTextField) {
+    if (textField == self.nameTextField || textField == self.passwordTextField || textField ==self.emailTextField) {
         [textField resignFirstResponder];
         return NO;
     }
@@ -51,10 +52,6 @@
 //    user.email = @"asuka@example.com";
     
     
-//    user.username = self.nameTextField.text;
-//    user.password = self.emailTextField
-    
-//    self.nameTextField.text;
     
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         
@@ -68,31 +65,40 @@
                                                          style:UIAlertActionStyleDefault
                                                        handler:^(UIAlertAction *action) {
                                                        }];
-            // add & present(show)VC
+            // add & present(show) in VC
             [alert addAction:ok];
             [self presentViewController:alert animated:YES completion:nil];
             
         } else {
-            // Show the errorString somewhere and let the user try again.
+           // Show the errorString somewhere and let the user try again.
 //            NSString *errorString = [error userInfo][@"error"];
-//            
-//            UIAlertController *errorAlert = [UIAlertController alertControllerWithTitle:@"Error"
-//                                                                                message:@"Your input was invalid."
-//                                                                         preferredStyle:UIAlertControllerStyleAlert];
-//            
-//            UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK"
-//                                                         style:UIAlertActionStyleDefault
-//                                                       handler:^(UIAlertAction *action) {
-//                                 }];
-//            [errorAlert addAction:ok];
-//            [self presentViewController:errorAlert animated:YES completion:nil];
+            
+            UIAlertController *errorAlert = [UIAlertController alertControllerWithTitle:@"Error"
+                                                                                message:@"Your input was invalid.\n Go back to Log in field."
+                                                                         preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK"
+                                                         style:UIAlertActionStyleDefault
+                                                       handler:^(UIAlertAction *action) {
+//                                                           NSLog(@"%@", action);
+//                                                           NSLog(@"%@", PFUser.currentUser.username);
+                                                           [self.navigationController popToRootViewControllerAnimated:YES];
+
+                                 }];
+            [errorAlert addAction:ok];
             
             [PFUser logInWithUsernameInBackground:user.username password:user.password block:^(PFUser * _Nullable user, NSError * _Nullable error) {
                 
                 if (!error){
                     NSLog(@"Successfully logged in");
+
                 }else {
-                    NSLog(@"Error in login");
+                    NSLog(@"Error in login, %@", error);
+                    
+                    // alertViewController is becoming a part of stack of navi
+                    [self.navigationController presentViewController:errorAlert animated:YES completion:nil];
+//                    [self presentViewController:errorAlert animated:YES completion:nil];
+
                 }
                 
             }];
